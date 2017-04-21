@@ -1,6 +1,5 @@
-package com.ecommerce.shop.entity;
+package com.ecommerce.core.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.math.BigDecimal;
