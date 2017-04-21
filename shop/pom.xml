@@ -23,7 +23,7 @@
     <dependencies>
         <dependency>
             <groupId>groupId</groupId>
-            <artifactId>ecommerce</artifactId>
+            <artifactId>core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
