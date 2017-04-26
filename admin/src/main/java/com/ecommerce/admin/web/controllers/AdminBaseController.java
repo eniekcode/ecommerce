@@ -23,6 +23,8 @@ public abstract class AdminBaseController {
         return messageSource.getMessage(code, null, defaultMsg, null);
     }
 
+    protected abstract String getHeaderTitle();
+
     @ModelAttribute("authenticatedUser")
     public AuthenticatedUser authenticatedUser(@AuthenticationPrincipal AuthenticatedUser authenticatedUser) {
         return authenticatedUser;

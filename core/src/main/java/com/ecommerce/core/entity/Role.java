@@ -26,7 +26,7 @@ public class Role extends EntityId {
     @JoinTable(
             name="role_permission",
             joinColumns={@JoinColumn(name="role_id", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="premission_id", referencedColumnName="id")})
+            inverseJoinColumns={@JoinColumn(name="perm_id", referencedColumnName="id")})
     private List<Permission> permissions;
 
     public String getName() {
