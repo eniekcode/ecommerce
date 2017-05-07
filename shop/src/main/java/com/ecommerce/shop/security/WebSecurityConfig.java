@@ -1,4 +1,4 @@
-package com.ecommerce.admin.security;
+package com.ecommerce.shop.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,18 +14,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
- * Created by dguzik
+ * Created by english on 5/7/17.
  */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, proxyTargetClass = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserDetailsService customUserDetailsService;
+    @Autowired private UserDetailsService customUserDetailsService;
 
     @Bean
-    public PasswordEncoder pansswordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -34,10 +33,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/resources/**", "/webjars/**", "/assets/**").permitAll()
-                .antMatchers("/").permitAll()
-                //.antMatchers(HttpMethod.POST,"/api","/api/**").hasRole("ROLE_ADMIN")
-                .anyRequest().authenticated()
+                .antMatchers("/resources/**", "/webjars/**", "/static2/assets/**").permitAll()
+                .antMatchers("/", "/register", "/forgotPwd","/resetPwd").permitAll()
+                .antMatchers("/myAccount","/checkout","/orders").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -47,7 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                //.logoutUrl("/logout")
                 .permitAll()
                 .and()
                 .exceptionHandling().accessDeniedPage("/403");
