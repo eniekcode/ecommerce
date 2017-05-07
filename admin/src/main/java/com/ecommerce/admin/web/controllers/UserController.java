@@ -32,12 +32,9 @@ public class UserController extends AdminBaseController {
 
     private static final String viewPrefix = "users/";
 
-    @Autowired
-    protected SecurityService securityService;
-    @Autowired
-    private UserValidator userValidator;
-    @Autowired
-    protected PasswordEncoder passwordEncoder;
+    @Autowired protected SecurityService securityService;
+    @Autowired private UserValidator userValidator;
+    @Autowired protected PasswordEncoder passwordEncoder;
 
     @Override
     protected String getHeaderTitle() {
@@ -60,7 +57,6 @@ public class UserController extends AdminBaseController {
     public String createUserForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        //model.addAttribute("rolesList",securityService.getAllRoles());
 
         return viewPrefix + "create_user";
     }
@@ -75,7 +71,7 @@ public class UserController extends AdminBaseController {
         String password = user.getPassword();
         String encodedPwd = passwordEncoder.encode(password);
         user.setPassword(encodedPwd);
-        User persistedUser = securityService.createUser(user);
+        securityService.createUser(user);
         redirectAttributes.addFlashAttribute("info", "User created successfully");
         return "redirect:/users";
     }
@@ -99,7 +95,6 @@ public class UserController extends AdminBaseController {
         }
         user.setRoles(userRoles);
         model.addAttribute("user", user);
-        //model.addAttribute("rolesList",allRoles);
         return viewPrefix + "edit_user";
     }
 
@@ -109,7 +104,7 @@ public class UserController extends AdminBaseController {
         if (result.hasErrors()) {
             return viewPrefix + "edit_user";
         }
-        User persistedUser = securityService.updateUser(user);
+        securityService.updateUser(user);
         redirectAttributes.addFlashAttribute("info", "User updates successfully");
         return "redirect:/users";
     }

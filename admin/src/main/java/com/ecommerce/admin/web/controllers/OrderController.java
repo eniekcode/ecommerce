@@ -53,7 +53,7 @@ public class OrderController extends  AdminBaseController{
     @RequestMapping(value="/orders/{orderNumber}", method=RequestMethod.POST)
     public String updateOrder(@ModelAttribute("order") Order order, BindingResult result,
                               Model model, RedirectAttributes redirectAttributes) {
-        Order persistedOrder = orderService.updateOrder(order);
+        orderService.updateOrder(order);
         redirectAttributes.addFlashAttribute("info", "Order updated successfully");
         return "redirect:/orders";
     }

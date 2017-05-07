@@ -29,13 +29,9 @@ import javax.servlet.Filter;
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    @Value("${server.port:9443}") private int serverPort;
+    @Autowired private PostAuthorizationFilter postAuthorizationFilter;
 
-    @Autowired
-    private PostAuthorizationFilter postAuthorizationFilter;
-
-    @Autowired
-    private MessageSource messageSource;
+    @Autowired private MessageSource messageSource;
 
     @Override
     public Validator getValidator() {
@@ -75,31 +71,4 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return new SpringSecurityDialect();
     }
 
-//    @Bean
-//    public EmbeddedServletContainerFactory servletContainer() {
-//        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
-//            @Override
-//            protected void postProcessContext(Context context) {
-//                SecurityConstraint securityConstraint = new SecurityConstraint();
-//                securityConstraint.setUserConstraint("CONFIDENTIAL");
-//                SecurityCollection collection = new SecurityCollection();
-//                collection.addPattern("/*");
-//                securityConstraint.addCollection(collection);
-//                context.addConstraint(securityConstraint);
-//            }
-//        };
-//
-//        tomcat.addAdditionalTomcatConnectors(initiateHttpConnector());
-//        return tomcat;
-//    }
-//
-//    private Connector initiateHttpConnector() {
-//        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-//        connector.setScheme("http");
-//        connector.setPort(9090);
-//        connector.setSecure(false);
-////        connector.setRedirectPort(serverPort);
-//
-//        return connector;
-//    }
 }

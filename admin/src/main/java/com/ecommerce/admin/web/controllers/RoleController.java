@@ -55,7 +55,6 @@ public class RoleController extends AdminBaseController {
     public String createRoleForm(Model model) {
         Role role = new Role();
         model.addAttribute("role", role);
-        //model.addAttribute("permissionsList",securityService.getAllPermissions());
 
         return viewPrefix + "create_role";
     }
@@ -67,7 +66,7 @@ public class RoleController extends AdminBaseController {
         if (result.hasErrors()) {
             return viewPrefix + "create_role";
         }
-        Role persistedRole = securityService.createRole(role);
+        securityService.createRole(role);
         redirectAttributes.addFlashAttribute("info", "Role created successfully");
         return "redirect:/roles";
     }
@@ -92,14 +91,13 @@ public class RoleController extends AdminBaseController {
         }
         role.setPermissions(rolePermissions);
         model.addAttribute("role", role);
-        //model.addAttribute("permissionsList",allPermissions);
         return viewPrefix + "edit_role";
     }
 
     @RequestMapping(value = "/roles/{id}", method = RequestMethod.POST)
     public String updateRole(@ModelAttribute("role") Role role, BindingResult result,
                              Model model, RedirectAttributes redirectAttributes) {
-        Role persistedRole = securityService.updateRole(role);
+        securityService.updateRole(role);
         redirectAttributes.addFlashAttribute("info", "Role updated successfully");
         return "redirect:/roles";
     }

@@ -59,7 +59,7 @@ public class CategoryController extends AdminBaseController {
         if(result.hasErrors()){
             return viewPrefix+"create_category";
         }
-        Category persistedCategory = catalogService.createCategory(category);
+        catalogService.createCategory(category);
         redirectAttributes.addFlashAttribute("info", "Category created successfully");
         return "redirect:/categories";
     }
@@ -73,7 +73,7 @@ public class CategoryController extends AdminBaseController {
 
     @RequestMapping(value="/categories/{id}", method=RequestMethod.POST)
     public String updateCategory(Category category, Model model, RedirectAttributes redirectAttributes) {
-        Category persistedCategory = catalogService.updateCategory(category);
+        catalogService.updateCategory(category);
         redirectAttributes.addFlashAttribute("info", "Category updated successfully");
         return "redirect:/categories";
     }

@@ -95,7 +95,6 @@ public class ProductForm {
         Category category = new Category();
         category.setId(categoryId);
         p.setCategory(category );
-        //p.setImageUrl(WebUtils.IMAGES_PREFIX+id+".jpg");
         return p;
     }
 
@@ -109,7 +108,6 @@ public class ProductForm {
         p.setPrice(product.getPrice());
         p.setSku(product.getSku());
         p.setCategoryId(product.getCategory().getId());
-        //p.setImageUrl(WebUtils.IMAGES_PREFIX+product.getId()+".jpg");
         return p;
     }
 }

@@ -63,7 +63,6 @@ public class ProductController extends AdminBaseController {
     public String createProductForm(Model model) {
         ProductForm product = new ProductForm();
         model.addAttribute("product", product);
-        //model.addAttribute("categoriesList",catalogService.getAllCategories());
         return viewPrefix + "create_product";
     }
 
@@ -75,7 +74,6 @@ public class ProductController extends AdminBaseController {
             return viewPrefix + "create_product";
         }
         Product product = productForm.toProduct();
-        Product persistedProduct = catalogService.createProduct(product);
         productForm.setId(product.getId());
         redirectAttributes.addFlashAttribute("info", "Product created successfully");
         return "redirect:/products";
@@ -85,7 +83,6 @@ public class ProductController extends AdminBaseController {
     public String editProductForm(@PathVariable Integer id, Model model) {
         Product product = catalogService.getProductById(id);
         model.addAttribute("product", ProductForm.fromProduct(product));
-        //model.addAttribute("categoriesList",catalogService.getAllCategories());
         return viewPrefix + "edit_product";
     }
 
@@ -97,7 +94,7 @@ public class ProductController extends AdminBaseController {
             return viewPrefix + "edit_product";
         }
         Product product = productForm.toProduct();
-        Product persistedProduct = catalogService.updateProduct(product);
+        catalogService.updateProduct(product);
         redirectAttributes.addFlashAttribute("info", "Product updated successfully");
         return "redirect:/products";
     }

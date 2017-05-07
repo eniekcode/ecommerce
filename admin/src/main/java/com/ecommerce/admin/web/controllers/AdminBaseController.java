@@ -12,23 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
  */
 public abstract class AdminBaseController {
 
-    @Autowired
-    protected MessageSource messageSource;
-
-    public String getMessage(String code) {
-        return messageSource.getMessage(code, null, null);
-    }
-
-    public String getMessage(String code, String defaultMsg) {
-        return messageSource.getMessage(code, null, defaultMsg, null);
-    }
-
     protected abstract String getHeaderTitle();
-
-    @ModelAttribute("authenticatedUser")
-    public AuthenticatedUser authenticatedUser(@AuthenticationPrincipal AuthenticatedUser authenticatedUser) {
-        return authenticatedUser;
-    }
 
     public static AuthenticatedUser getCurrentUser() {
 
@@ -41,7 +25,4 @@ public abstract class AdminBaseController {
         return null;
     }
 
-    public static boolean isLoggedIn() {
-        return getCurrentUser() != null;
-    }
 }

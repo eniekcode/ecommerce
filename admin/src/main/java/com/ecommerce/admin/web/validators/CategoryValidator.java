@@ -14,7 +14,6 @@ import org.springframework.validation.Validator;
 @Component
 public class CategoryValidator implements Validator {
 
-    @Autowired protected MessageSource messageSource;
     @Autowired protected CatalogService catalogService;
 
     @Override
